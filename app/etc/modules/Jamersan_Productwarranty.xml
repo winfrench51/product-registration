@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Jamersan_Productwarranty>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Jamersan_Productwarranty>
+    </modules>
+</config>
