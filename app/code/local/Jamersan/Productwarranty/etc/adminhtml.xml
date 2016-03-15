@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ /**
+  ~ @category    Jamersan
+  ~ @package     Jamersan_Productwarranty
+  ~ @copyright   Copyright (c) 2016 Jamersan LLC, (http://www.jamersan.com/)
+  ~ @author      William French <will.french@jamersan.com>
+  ~ **/
+  -->
+
+<config>
+    <menu>
+        <productwarranty module="productwarranty">
+            <title>Registered Products</title>
+            <sort_order>71</sort_order>
+            <action>productwarranty/adminhtml_registrations</action>
+        </productwarranty>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <productwarranty module="productwarranty">
+                        <title>Registered Products</title>
+                        <sort_order>71</sort_order>
+                        <action>productwarranty/adminhtml_registrations</action>
+                    </productwarranty>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <productwarranty>
+                                        <title>Registered Products</title>
+                                    </productwarranty>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+
+</config>
