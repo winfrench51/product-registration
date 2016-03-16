@@ -1,0 +1,296 @@
+<?php
+/**
+ * *
+ * @category    Jamersan
+ * @package     Jamersan_Productwarranty
+ * @copyright   Copyright (c) 2016 Jamersan LLC, (http://www.jamersan.com/)
+ * @author      William French <will.french@jamersan.com>
+ *
+ */
+
+echo $this->getChildHtml('html_calendar'); ?>
+<style>
+    .form-list .prod_field {
+    }
+
+    .form-list .prod_field_file {
+        float: left;
+        width: 185px;
+    }
+
+    .form-list .prod-input-box {
+        clear: both;
+        display: block;
+        width: 148px;
+    }
+
+    .form-list .prod_field input.input-text {
+        width: 130px;
+    }
+
+    .form-list .prod_field select {
+        width: 130px;
+    }
+
+    .removelink {
+        float: left;
+        line-height: 21px;
+        margin: 0;
+        padding-top: 20px;
+        width: 32px;
+    }
+
+    .form-list .prod_field input.datetype {
+        width: 64px;
+    }
+
+    .form-list .fields input.input-title {
+        width: 50px;
+    }
+
+    .form-list .titleselect {
+        width: 54px;
+    }
+
+    .my-registration {
+        max-width: 700px;
+    }
+</style>
+<div class="my-registration">
+    <div class="page-title">
+        <h1>Product Registration</h1>
+    </div>
+    <form id="form-validate" method="post" action="<?php echo $this->getUrl('productwarranty/register/post'); ?>" enctype="multipart/form-data">
+        <div class="fieldset">
+            <p>Registering your product will allow us to contact you with product notifications and help us to provide more efficient service in case you need help with your product. </p>
+            <ul class="form-list">
+
+                <li class="fields">
+                    <div class="customer-name">
+                        <div class="field name-firstname">
+                            <label class="required" for="firstname"><em>*</em>First Name</label>
+                            <div class="input-box">
+                                <input type="text" class="input-text required-entry" maxlength="255" title="First Name" value="" name="firstname" id="firstname">
+                            </div>
+                        </div>
+                        <div class="field name-lastname">
+                            <label class="required" for="lastname"><em>*</em>Last Name</label>
+                            <div class="input-box">
+                                <input type="text" class="input-text required-entry" maxlength="255" title="Last Name" value="" name="lastname" id="lastname">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="fields">
+                    <div class="customer-name">
+                        <div class="field name-firstname">
+                            <label class="required" for="firstname"><em>*</em>Address 1</label>
+                            <div class="input-box">
+                                <input type="text" class="input-text required-entry" maxlength="255" title="Address 1" value="" name="address1" id="address1">
+                            </div>
+                        </div>
+                        <div class="field name-lastname">
+                            <label class="required" for="lastname">Address 2</label>
+                            <div class="input-box">
+                                <input type="text" class="input-text" maxlength="255" title="Address 2" value="" name="address2" id="address2">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="fields">
+                    <div class="customer-name">
+                        <div class="field name-firstname">
+                            <label class="required" for="firstname"><em>*</em>City</label>
+                            <div class="input-box">
+                                <input type="text" class="input-text required-entry" maxlength="255" value="" name="city" id="city">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="required" for="region_id"><em>*</em>State</label>
+                            <div class="input-box">
+                                <select id="region_id" name="state_id" title="<?php echo $this->__('State/Province') ?>" class="validate-select" style="display:none;">
+                                    <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                                </select>
+                                <script type="text/javascript">
+                                    //<![CDATA[
+                                    $('region_id').setAttribute('defaultValue', "");
+                                    //]]>
+                                </script>
+                                <input type="text" id="region" name="state" class="input-text required-entry" style="display:none;"/>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="field">
+                        <label for="zip" class="required"><em>*</em><?php echo $this->__('Zip/Postal Code') ?></label>
+                        <div class="input-box">
+                            <input type="text" name="postcode" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international"/>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                        <div class="input-box">
+                            <?php $_countries = Mage::getResourceModel('directory/country_collection')
+                                ->loadData()
+                                ->toOptionArray(false) ?>
+                            <?php if (count($_countries) > 0): ?>
+                                <select name="country" id="country">
+                                    <option value="">-- Please Select --</option>
+                                    <?php foreach ($_countries as $_country):
+                                        $selected = "";
+                                        if ($_country['value'] == 'US') {
+                                            $selected = "selected";
+                                        }
+                                        ?>
+                                        <option value="<?php echo $_country['value'] ?>" <?php echo $selected; ?>>
+                                            <?php echo $_country['label'] ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="fields">
+                    <div class="customer-name">
+                        <div class="field name-telephone">
+                            <label class="required" for="email_address"><em>*</em>Email Address</label>
+                            <div class="input-box">
+                                <input type="text" class="input-text validate-email required-entry" title="Email Address" id="email_address" name="email">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+                <?php if (Mage::getStoreConfig('productwarranty/general/enabled_newsletter_subscr')) { ?>
+                    <li class="fields">
+                        <div class="customer-name">
+                            <div class="field name-telephone">
+
+                                <div class="input-box">
+                                    <input type="checkbox" class="input-checkboc" title="Subscribe newsletter" id="register_newsletter" name="register_newsletter" value="1" checked="checked"> Subscribe Newsletter
+                                </div>
+                            </div>
+
+                        </div>
+                    </li>   <?php } ?>
+
+
+            </ul>
+        </div>
+
+        <?php $products = Mage::getModel('catalog/product')->getCollection();
+        $products->addAttributeToSelect('name');
+        $products->addAttributeToSelect('entity_id')->addFieldToFilter('warranty', '1');
+
+        ?>
+        <div class="fieldset">
+            <h2 class="legend">Product Information</h2>
+            <ul class="form-list">
+                <?php for ($i = 1; $i <= 10; $i++) {
+                    ?>
+                    <li class="fields" id="prod_div_<?php echo $i ?>" <?php if ($i > 1) {
+                        echo "style='display:none;'";
+                    } ?>>
+                        <input type="hidden" id="prod_hide_<?php echo $i ?>" name="hide[]" value="<?php if ($i > 1) {
+                            echo "0";
+                        } else {
+                            echo "1";
+                        } ?>"/>
+                        <div class="prod_field">
+                            <label class="required" for="product"><em>*</em>Model number</label>
+                            <div class="prod-input-box">
+                                <input type="text" class="input-text required-entry" title="Model Number" name="product_sku[]">
+                            </div>
+                        </div>
+                        <div class="prod_field">
+                            <label class="required" for="confirmation"><em>*</em>Serial Number</label>
+                            <div class="prod-input-box">
+                                <input type="text" class="input-text required-entry" title="Serial Number" name="serial_number[]">
+                            </div>
+                        </div>
+                        <div class="prod_field">
+                            <label class="required" for="confirmation"><em>*</em>Date of Purchase</label>
+                            <div class="prod-input-box">
+                                <input type="text" class="input-text datetype required-entry" name="purchase_date[]" id="purchase_date<?php echo $i ?>"/>
+                                <img title="Select date" id="cal_date_trig<?php echo $i ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN) . 'adminhtml/default/default/images/grid-cal.gif'; ?>" class="v-middle"/>
+
+                            </div>
+                        </div>
+                        <div class="prod_field">
+                            <label class="required" for="purchased_from"><em>*</em>Purchased From</label>
+                            <div class="prod-input-box">
+                                <input type="text" class="input-text required-entry" title="Purchased From" name="purchased_from[]">
+                            </div>
+                        </div>
+                        <?php if ($i > 1) { ?>
+                            <div class="removelink">
+                                <a href="javascript:void(0)" onclick="hideMe(<?php echo $i ?>)">remove</a>
+                            </div> <?php } ?>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            Calendar.setup({
+                                inputField: 'purchase_date<?php echo $i ?>',
+                                ifFormat: '%m/%e/%y',
+                                button: 'cal_date_trig<?php echo $i ?>',
+                                align: 'Bl',
+                                singleClick: true
+                            });  //]]>
+                        </script>
+                    </li>
+
+                <?php } ?>
+
+
+                <div class="add_more" id="addmore"><a href="javascript:void(0)" onclick="addMore()">add</a></div>
+            </ul>
+
+
+        </div>
+        <div class="buttons-set">
+            <p class="required">* Required Fields</p>
+            <button type="submit" title="<?php echo 'Submit'; ?>" class="button">
+                <span><span><?php echo 'Submit'; ?></span></span></button>
+            <button type="button" title="<?php echo 'Back'; ?>" class="button" onclick="history.back(-1)">
+                <span><span><?php echo 'Back'; ?></span></span></button>
+        </div>
+    </form>
+    <script type="text/javascript">
+        var i = 1;
+        function hideMe(val) {
+            if (document.getElementById('prod_div_' + val)) {
+                document.getElementById('prod_div_' + val).style.display = "none";
+            }
+            if (document.getElementById('prod_hide_' + val)) {
+                document.getElementById('prod_hide_' + val).value = 0;
+            }
+            i = 1;
+        }
+
+        function addMore() {
+            i = i + 1;
+            if (document.getElementById('prod_div_' + i)) {
+                document.getElementById('prod_div_' + i).style.display = "block";
+            }
+            if (document.getElementById('prod_hide_' + i)) {
+                document.getElementById('prod_hide_' + i).value = 1;
+            }
+            if (i > 10) {
+                document.getElementById('addmore').innerHTML = "Only 10 products allowed one time!";
+            }
+        }
+        //<![CDATA[
+        var dataForm = new VarienForm('form-validate', true);
+
+        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+
+        //]]>
+    </script>
+</div>

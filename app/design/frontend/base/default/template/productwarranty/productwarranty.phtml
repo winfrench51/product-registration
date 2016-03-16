@@ -1,0 +1,63 @@
+<div class="my-product-registered">
+    <?php $_products = $this->getCollection(); ?>
+
+    <div class="page-title">
+        <h1>My Registered Products</h1>
+
+    </div>
+    <button type="button" class="button" onclick="window.location='<?php echo $this->getUrl("productwarranty") . "register"; ?>'">
+        <span><span>Register Product</span></span></button>
+    <?php if ($_products->getSize()): ?>
+        <?php echo $this->getPagerHtml(); ?>
+        <table class="data-table" id="my-orders-table">
+            <col width="1"/>
+            <col width="1"/>
+            <col/>
+            <col width="1"/>
+            <col width="1"/>
+            <col width="1"/>
+            <thead>
+                <tr>
+                    <th><?php echo $this->__('#') ?></th>
+                    <th><?php echo $this->__('SKU') ?></th>
+                    <th><?php echo $this->__('Product Name') ?></th>
+                    <th><?php echo $this->__('Serial Number') ?></th>
+                    <th><?php echo $this->__('Date of Purchase') ?></th>
+                    <th><span class="nobr"><?php echo $this->__('Purchased  From') ?></span></th>
+                    <th><span class="nobr"><?php echo $this->__('Created On') ?></span></th>
+                    <th><span class="nobr"><?php echo $this->__('Proof of Purchase') ?></span></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <?php $i = 1;
+                foreach ($_products as $_product):
+                    $pwid = $_product->getPw_id();
+                    $data = Mage::getModel('productwarranty/productwarranty')->load($pwid);
+
+                    ?>
+                    <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $_product->getProduct_sku(); ?></td>
+                        <td><?php echo $_product->getProduct_name(); ?></td>
+                        <td><?php echo $_product->getSerial_number(); ?></td>
+                        <td><?php echo $_product->getPurchase_date(); ?></td>
+                        <td><?php echo $_product->getPurchased_from(); ?></td>
+                        <td><?php echo $data->getCreated_time(); ?></td>
+                        <td><?php if ($_product->getFile_proof() != "") {
+                                echo "<a href='" . Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $_product->getFile_proof() . "' target='_blank'>File</a>";
+                            } else {
+                                echo "---";
+                            } ?></td>
+                    </tr>
+                    <?php $i++; endforeach; ?>
+
+            </tbody>
+        </table>
+        <script type="text/javascript">decorateTable('my-product-table');</script>
+    <?php echo $this->getPagerHtml(); ?>
+    <?php else: ?>
+        <p><?php echo $this->__('No products registered.'); ?></p>
+    <?php endif ?>
+</div>
+
