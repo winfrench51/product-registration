@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+  ~ /**
+  ~ @category    Jamersan
+  ~ @package     Jamersan_Productwarranty
+  ~ @copyright   Copyright (c) 2016 Jamersan LLC, (http://www.jamersan.com/)
+  ~ @author      William French <will.french@jamersan.com>
+  ~ **/
+  -->
+
+<layout version="0.1.0">
+    <productwarranty_adminhtml_productwarranty_index>
+        <reference name="content">
+            <block type="productwarranty/adminhtml_productwarranty" name="productwarranty"/>
+        </reference>
+    </productwarranty_adminhtml_productwarranty_index>
+    <productwarranty_adminhtml_registrations_index>
+        <reference name="content">
+            <block type="productwarranty/adminhtml_registrations" name="registrations"/>
+        </reference>
+    </productwarranty_adminhtml_registrations_index>
+    <productwarranty_adminhtml_registrations_view>
+        <reference name="content">
+            <block type="productwarranty/adminhtml_productwarranty_view" name="productwarranty_view"
+                   template="productwarranty/view.phtml"/>
+        </reference>
+    </productwarranty_adminhtml_registrations_view>
+</layout>

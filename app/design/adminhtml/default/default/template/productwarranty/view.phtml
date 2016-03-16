@@ -1,0 +1,99 @@
+<?php
+/**
+ * *
+ * @category    Jamersan
+ * @package     Jamersan_Productwarranty
+ * @copyright   Copyright (c) 2016 Jamersan LLC, (http://www.jamersan.com/)
+ * @author      William French <will.french@jamersan.com>
+ *
+ */
+
+$model = Mage::registry('productwarranty_data'); ?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tr>
+            <td style="width:50%;"><h3 class="icon-head head-products">Product Registration Details</h3>
+                <p class="content-buttons form-buttons">
+                    <button style="" onclick="history.back(-1);" class="scalable back" type="button" title="Create New Attribute" id="create_attribute_7">
+                        <span><span><span>Back</span></span></span></button>
+                </p>
+
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="entry-edit">
+    <div class="hor-scroll">
+        <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend">Customer Information</h4>
+        </div>
+
+        <div class="fieldset fieldset-wide">
+            <table cellspacing="0" class="form-list">
+                <tbody>
+                    <tr>
+                        <td class="label"><label for="name">Name</label></td>
+                        <td class="value"> <?php echo $model->getTitle(); ?><?php echo $model->getFirstname(); ?><?php echo $model->getLastname(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="name">Email</label></td>
+                        <td class="value"> <?php echo $model->getEmail(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="name">Address 1</label></td>
+                        <td class="value"> <?php echo $model->getAddress1(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="name">Address 2</label></td>
+                        <td class="value"> <?php echo $model->getAddress2(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="name">City</label></td>
+                        <td class="value"> <?php echo $model->getCity(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="name">State</label></td>
+                        <td class="value"> <?php echo $model->getState(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="name">Country</label></td>
+                        <td class="value"> <?php echo $model->getCountry(); ?></td>
+                    </tr>
+                    <tr>
+                        <td class="label"><label for="name">Zip Code</label></td>
+                        <td class="value"> <?php echo $model->getPostcode(); ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="entry-edit-head"><h4 class="icon-head head-edit-form fieldset-legend">Product Information</h4></div>
+        <?php $connection = Mage::getSingleton('core/resource')->getConnection('core_read');
+        $sql = "SELECT * from " . Mage::getConfig()->getTablePrefix() . "productwarranty_products where pw_id='" . $model->getProductwarranty_id() . "'";
+        $rowsArray = $connection->fetchAll($sql); // return all rows ?>
+        <div class="fieldset fieldset-wide">
+            <table cellspacing="0" class="form-list">
+                <tbody>
+                    <tr bgcolor='#CCCCCC'>
+                        <td><strong>Model#</strong></td>
+                        <td><strong>Serial#</strong></td>
+                        <td><strong>Date of Purchase</strong></td>
+                        <td><strong>Purchased From</strong></td>
+                    </tr>
+
+                    <?php
+                    foreach ($rowsArray as $row) {
+                        echo "<tr bgcolor='#EFFFFD'><td>" . $row['product_sku'] . "</td><td>" . $row['serial_number'] . "</td><td>" . $row['purchase_date'] . "</td><td>" . $row['purchased_from'] . "</td><td>";
+                        echo "</td></tr>";
+                    }
+                    ?>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+
+
